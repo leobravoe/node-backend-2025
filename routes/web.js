@@ -1,17 +1,22 @@
-// O objeto desse arquivo é configurar as rotas web
 const express = require('express');
 const router = express.Router();
 const DataBase = require("../database/DataBase");
 
-// Ainda não é uma rota WEB
+// Rota WEB index
 router.get("/", async (request, response) => {
-    return response.send("Seja bem vindo.");
+    return response.render("index");
 });
 
-// Ainda não é uma rota WEB
+// Rota WEB index de Produto
 router.get("/produto", async (request, response) => {
-    const result = await DataBase.executeSQLQuery("SELECT * FROM Produto");
-    return response.send(result);
+    const produtos = await DataBase.executeSQLQuery("SELECT * FROM Produto");
+    return response.render("produto/index", { produtos });
+});
+
+// Rota WEB index de TipoProduto
+router.get("/tipoproduto", async (request, response) => {
+    const tipoProdutos = await DataBase.executeSQLQuery("SELECT * FROM TipoProduto");
+    return response.render("tipoproduto/index", { tipoProdutos });
 });
 
 module.exports = router;
