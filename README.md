@@ -19,6 +19,11 @@
     copy .env.example .env
     ```
 
+5. Rode o script SQL para criar o banco
+    ```bash
+    Rode o script SQL para criar o banco "fornatto_db_2"
+    ```
+
 
 Com o projeto configurado, para atualizar:
 
