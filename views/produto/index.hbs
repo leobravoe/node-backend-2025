@@ -13,9 +13,9 @@
 
     {{!-- Imprimindo um array de objetos de forma genérica --}}
     {{#each produtos as |produto|}}
-    {{#each produto}}
-        <p>{{@key}}: {{this}}</p>
-    {{/each }}
+        {{#each produto}}
+            <p>{{@key}}: {{this}}</p>
+        {{/each }}
     {{/each }}
 
     {{!-- Imprimindo um array de objetos quando se conhece a estrutura --}}
