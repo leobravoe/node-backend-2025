@@ -10,6 +10,7 @@ router.get("/", async (request, response) => {
 // Rota WEB index de Produto
 router.get("/produto", async (request, response) => {
     const produtos = await DataBase.executeSQLQuery("SELECT * FROM Produto");
+    // [  {id: 1, nome: "Pepperoni", ...}, {id: 2, "Laranja", ...}, {id: 3, Skol - Lata} ]
     return response.render("produto/index", { produtos });
 });
 
