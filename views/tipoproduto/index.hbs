@@ -25,33 +25,17 @@
                 </tr>
             </thead>
             <tbody>
+                {{#each tipoProdutos}}
                 <tr>
-                    <th>1</th>
-                    <td>Pizza</td>
+                    <th>{{this.id}}</th>
+                    <td>{{this.descricao}}</td>
                     <td>
                         <a href="#" class="btn btn-primary">Mostrar</a>
                         <a href="#" class="btn btn-secondary">Editar</a>
                         <a href="#" class="btn btn-danger">Remover</a>
                     </td>
                 </tr>
-                <tr>
-                    <th>2</th>
-                    <td>Suco</td>
-                    <td>
-                        <a href="#" class="btn btn-primary">Mostrar</a>
-                        <a href="#" class="btn btn-secondary">Editar</a>
-                        <a href="#" class="btn btn-danger">Remover</a>
-                    </td>
-                </tr>
-                <tr>
-                    <th>3</th>
-                    <td>Cerveja</td>
-                    <td>
-                        <a href="#" class="btn btn-primary">Mostrar</a>
-                        <a href="#" class="btn btn-secondary">Editar</a>
-                        <a href="#" class="btn btn-danger">Remover</a>
-                    </td>
-                </tr>
+                {{/each}}
             </tbody>
         </table>
     </div>
