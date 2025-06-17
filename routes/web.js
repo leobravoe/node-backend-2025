@@ -27,4 +27,9 @@ router.get("/tipoproduto", async (request, response) => {
     return response.render("tipoproduto/index", { tipoProdutos });
 });
 
+// Rota WEB index de Recurso
+router.get("/recurso", async (request, response) => {
+    return response.render("recurso/index");
+});
+
 module.exports = router;
