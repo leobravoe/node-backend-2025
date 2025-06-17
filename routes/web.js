@@ -21,6 +21,12 @@ router.get("/produto", async (request, response) => {
     return response.render("produto/index", { produtos });
 });
 
+// Rota WEB create de Produto
+router.get("/produto/create", async (request, response) => {
+    const tipoProdutos = await DataBase.executeSQLQuery("SELECT * FROM TipoProduto");
+    response.render("Produto/create", { tipoProdutos });
+});
+
 // Rota WEB index de TipoProduto
 router.get("/tipoproduto", async (request, response) => {
     const tipoProdutos = await DataBase.executeSQLQuery("SELECT * FROM TipoProduto");
