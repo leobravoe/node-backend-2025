@@ -10,8 +10,12 @@ dotenv.config();
 
 // Guardando dentro da variável app uma propriedade
 app.set("port", process.env.PORT || 5000);
+
 // Seto a propriedade "view engine" do express com "hbs"
 app.set("view engine", "hbs");
+
+// Define as rotas estáticas para os arquivos da pasta /public
+app.use(express.static("./public"));
 
 // Define as rotas
 app.use(webRoutes);
