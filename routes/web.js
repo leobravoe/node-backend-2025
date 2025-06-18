@@ -29,7 +29,7 @@ router.get("/produto/create", async (request, response) => {
 
 // Rota WEB store de Produto
 router.post("/produto", async (request, response) => {
-    response.send(request);
+    response.send(request.body);
 });
 
 // Rota WEB index de TipoProduto
