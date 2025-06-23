@@ -42,9 +42,9 @@
             <div class="my-2">
                 <label for="id-input-tipo" class="form-label">Tipo</label>
                 <select name="TipoProduto_id" id="" class="form-select">
-                    <option value="1">Pizza</option>
-                    <option value="2">Suco</option>
-                    <option value="3">Cerveja</option>
+                    {{#each tipoProdutos}}
+                    <option value="{{this.id}}">{{this.descricao}}</option>
+                    {{/each}}
                 </select>
             </div>
             {{!-- Grupo Ingredientes --}}
