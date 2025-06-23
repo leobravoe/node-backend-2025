@@ -13,7 +13,8 @@ router.get("/produto", async (request, response) => {
         SELECT Produto.*, 
                TipoProduto.descricao 
         FROM Produto 
-        JOIN TipoProduto ON TipoProduto_id = TipoProduto.id;`
+        JOIN TipoProduto ON TipoProduto_id = TipoProduto.id
+        ORDER BY Produto.id;`
     );
     // [  {id: 1, nome: "Pepperoni", ...}, {id: 2, "Laranja", ...}, {id: 3, Skol - Lata, ...} ]
     // console.log(produtos);
@@ -29,7 +30,26 @@ router.get("/produto/create", async (request, response) => {
 
 // Rota WEB store de Produto
 router.post("/produto", async (request, response) => {
-    response.send(request.body);
+    const numero = request.body.numero;
+    const nome = request.body.nome;
+    const preco = request.body.preco;
+    const TipoProduto_id = request.body.TipoProduto_id;
+    const ingredientes = request.body.ingredientes;
+    const timestamp = (new Date()).toISOString().slice(0, 19).replace('T', ' ');
+    const dataAtualizacao = timestamp;
+    const dataCriacao = timestamp;
+    const result = await DataBase.executeSQLQuery(`INSERT INTO Produto VALUES(null, ?, ?, ?, ?, ?, ?, ?)`,
+        [
+            numero,
+            nome,
+            preco,
+            TipoProduto_id,
+            ingredientes,
+            dataAtualizacao,
+            dataCriacao
+        ]
+    );
+    response.redirect("/produto");
 });
 
 // Rota WEB index de TipoProduto
