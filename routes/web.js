@@ -66,7 +66,9 @@ router.get("/tipoproduto/create", async (request, response) => {
 
 // Rota WEB create de TipoProduto
 router.post("/tipoproduto", async (request, response) => {
-    
+    const tipoProduto = new TipoProdutoModel();
+    tipoProduto.descricao = request.body.descricao;
+    const result = await tipoProduto.save();
     return response.redirect("/tipoproduto");
 });
 
