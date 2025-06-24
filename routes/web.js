@@ -58,6 +58,16 @@ router.get("/tipoproduto", async (request, response) => {
     return response.render("tipoproduto/index", { tipoProdutos });
 });
 
+// Rota WEB create de TipoProduto
+router.get("/tipoproduto/create", async (request, response) => {
+    return response.render("tipoproduto/create");
+});
+
+// Rota WEB create de TipoProduto
+router.post("/tipoproduto", async (request, response) => {
+    return response.send(request.body);
+});
+
 // Rota WEB index de Recurso
 router.get("/recurso", async (request, response) => {
     return response.render("recurso/index");
