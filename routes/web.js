@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const DataBase = require("../database/DataBase");
+const TipoProdutoModel = require("../models/TipoProdutoModel");
 
 // Rota WEB index
 router.get("/", async (request, response) => {
@@ -65,18 +66,7 @@ router.get("/tipoproduto/create", async (request, response) => {
 
 // Rota WEB create de TipoProduto
 router.post("/tipoproduto", async (request, response) => {
-    const descricao = request.body.descricao;
-    // Gera uma data do tipo string no formato "YYYY-MM-DD HH:MM:SS"
-    const timestamp = (new Date()).toISOString().slice(0, 19).replace('T', ' ');
-    const dataAtualizacao = timestamp;
-    const dataCriacao = timestamp;
-    const result = await DataBase.executeSQLQuery(`INSERT INTO TipoProduto VALUES(null, ?, ?, ?)`,
-        [
-            descricao,
-            dataAtualizacao,
-            dataCriacao
-        ]
-    );
+    
     return response.redirect("/tipoproduto");
 });
 
