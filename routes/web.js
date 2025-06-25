@@ -55,7 +55,7 @@ router.post("/produto", async (request, response) => {
 
 // Rota WEB index de TipoProduto
 router.get("/tipoproduto", async (request, response) => {
-    const tipoProdutos = await DataBase.executeSQLQuery("SELECT * FROM TipoProduto");
+    const tipoProdutos = await TipoProdutoModel.findAll();
     return response.render("tipoproduto/index", { tipoProdutos });
 });
 
@@ -64,7 +64,7 @@ router.get("/tipoproduto/create", async (request, response) => {
     return response.render("tipoproduto/create");
 });
 
-// Rota WEB create de TipoProduto
+// Rota WEB store de TipoProduto
 router.post("/tipoproduto", async (request, response) => {
     const tipoProduto = new TipoProdutoModel();
     tipoProduto.descricao = request.body.descricao;
