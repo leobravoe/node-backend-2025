@@ -28,7 +28,7 @@ router.post("/produto", async (request, response) => {
     produto.preco = request.body.preco;
     produto.TipoProduto_id = request.body.TipoProduto_id;
     produto.ingredientes = request.body.ingredientes;
-    await produto.save();
+    const result = await produto.save();
     response.redirect("/produto");
 });
 
