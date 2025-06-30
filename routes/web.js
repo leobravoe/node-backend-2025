@@ -23,6 +23,12 @@ router.get("/produto/create", async (request, response) => {
 // Rota WEB store de Produto
 router.post("/produto", async (request, response) => {
     const produto = new ProdutoModel();
+    produto.numero = request.body.numero;
+    produto.nome = request.body.nome;
+    produto.preco = request.body.preco;
+    produto.TipoProduto_id = request.body.TipoProduto_id;
+    produto.ingredientes = request.body.ingredientes;
+    await produto.save();
     response.redirect("/produto");
 });
 
