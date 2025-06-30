@@ -92,7 +92,7 @@ class ProdutoModel {
      */
     static async findAllWithTipoProdutoDescricao() {
         const result = await DataBase.executeSQLQuery(`SELECT Produto.*,
-                                                              TipoProduto.descricao as TipoProduto_descricao
+                                                              TipoProduto.descricao
                                                        FROM Produto
                                                        JOIN TipoProduto ON Produto.TipoProduto_id = TipoProduto.id
                                                        ORDER BY Produto.id`);
