@@ -7,8 +7,8 @@ class WebTipoProdutoController {
      * @param {*} res Resposta da rota do express
      */
     async index(req, res) {
-        $tipoProdutos = await TipoProdutoModel.findAll();
-        return res.render("tipoproduto/index", { $tipoProdutos });
+        const tipoProdutos = await TipoProdutoModel.findAll();
+        return res.render("tipoproduto/index", { tipoProdutos });
     }
 
     /**
