@@ -1,59 +1,32 @@
-const express = require('express');
+const express = require("express");
+const webProdutoController = require("../controllers_web/WebProdutoController");
+const webTipoProdutoController = require("../controllers_web/WebTipoProdutoController");
 const router = express.Router();
-const TipoProdutoModel = require("../models/TipoProdutoModel");
-const ProdutoModel = require("../models/ProdutoModel");
 
-// Rota WEB index
-router.get("/", async (request, response) => {
-    return response.render("index");
-});
+// Rotas de TipoProduto
+router.get("/tipoproduto", webTipoProdutoController.index);
+router.get("/tipoproduto/create", webTipoProdutoController.create);
+router.post("/tipoproduto", webTipoProdutoController.store);
+router.get("/tipoproduto/:tipoProdutoId", webTipoProdutoController.show);
+router.get("/tipoproduto/:tipoProdutoId/edit", webTipoProdutoController.edit);
+router.put("/tipoproduto/:tipoProdutoId", webTipoProdutoController.update);
+router.delete("/tipoproduto/:tipoProdutoId", webTipoProdutoController.destroy);
 
-// Rota WEB index de Produto
-router.get("/produto", async (request, response) => {
-    const produtos = await ProdutoModel.findAllWithTipoProdutoDescricao();
-    return response.render("produto/index", { produtos });
-});
+// Rotas de Produto
+router.get("/produto", webProdutoController.index);
+router.get("/produto/create", webProdutoController.create);
+router.post("/produto", webProdutoController.store);
+router.get("/produto/:produtoId", webProdutoController.show);
+router.get("/produto/:produtoId/edit", webProdutoController.edit);
+router.put("/produto/:produtoId", webProdutoController.update);
+router.delete("/produto/:produtoId", webProdutoController.destroy);
 
-// Rota WEB create de Produto
-router.get("/produto/create", async (request, response) => {
-    const tipoProdutos = await TipoProdutoModel.findAll();
-    response.render("produto/create", { tipoProdutos });
-});
-
-// Rota WEB store de Produto
-router.post("/produto", async (request, response) => {
-    const produto = new ProdutoModel();
-    produto.numero = request.body.numero;
-    produto.nome = request.body.nome;
-    produto.preco = request.body.preco;
-    produto.TipoProduto_id = request.body.TipoProduto_id;
-    produto.ingredientes = request.body.ingredientes;
-    const result = await produto.save();
-    response.redirect("/produto");
-});
-
-// Rota WEB index de TipoProduto
-router.get("/tipoproduto", async (request, response) => {
-    const tipoProdutos = await TipoProdutoModel.findAll();
-    return response.render("tipoproduto/index", { tipoProdutos });
-});
-
-// Rota WEB create de TipoProduto
-router.get("/tipoproduto/create", async (request, response) => {
-    return response.render("tipoproduto/create");
-});
-
-// Rota WEB store de TipoProduto
-router.post("/tipoproduto", async (request, response) => {
-    const tipoProduto = new TipoProdutoModel();
-    tipoProduto.descricao = request.body.descricao;
-    const result = await tipoProduto.save();
-    return response.redirect("/tipoproduto");
-});
-
-// Rota WEB index de Recurso
+// Demais rotas ainda sem controlador (iremos criar um controlador para essas rotas no futuro)
 router.get("/recurso", async (request, response) => {
-    return response.render("recurso/index");
+    response.render("Recurso/index");
+});
+router.get("/", async (request, response) => {
+    response.render("index");
 });
 
 module.exports = router;
