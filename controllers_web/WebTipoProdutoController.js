@@ -8,6 +8,7 @@ class WebProdutoController {
      */
     async index(req, res) {
     }
+
     /**
     * Mostra um formulário para criação de um novo recurso
     * @param {*} req Requisição da rota do express
@@ -15,6 +16,7 @@ class WebProdutoController {
     */
     async create(req, res) {
     }
+
     /**
     * Salva um novo recurso no banco de dados
     * @param {*} req Requisição da rota do express
@@ -22,6 +24,7 @@ class WebProdutoController {
     */
     async store(req, res) {
     }
+
     /**
     * Mostra um recurso específico
     * @param {*} req Requisição da rota do express
@@ -30,6 +33,7 @@ class WebProdutoController {
     */
     async show(req, res) {
     }
+
     /**
     * Mostra um formulário para editar um recurso específico
     * @param {*} req Requisição da rota do express
@@ -38,6 +42,7 @@ class WebProdutoController {
     */
     async edit(req, res) {
     }
+
     /**
     * Atualiza um recurso existente no banco de dados
     * @param {*} req Requisição da rota do express
@@ -46,6 +51,7 @@ class WebProdutoController {
     */
     async update(req, res) {
     }
+
     /**
     * Remove um recurso existente do banco de dados
     * @param {*} req Requisição da rota do express
