@@ -17,6 +17,7 @@ class WebTipoProdutoController {
      * @param {*} res Resposta da rota do express
      */
     async create(req, res) {
+        return res.render("tipoproduto/create");
     }
 
     /**
@@ -25,6 +26,10 @@ class WebTipoProdutoController {
      * @param {*} res Resposta da rota do express
      */
     async store(req, res) {
+        const tipoProduto = new TipoProdutoModel();
+        tipoProduto.descricao = req.body.descricao;
+        const result = await tipoProduto.save();
+        return res.redirect("/tipoproduto");
     }
 
     /**
