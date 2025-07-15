@@ -1,5 +1,6 @@
 const ProdutoModel = require("../models/ProdutoModel");
 const TipoProdutoModel = require("../models/TipoProdutoModel");
+
 class WebProdutoController {
     /**
      * Mostra uma tela com todos os recursos
