@@ -7,7 +7,8 @@ class WebProdutoController {
      * @param {*} res Resposta da rota do express
      */
     async index(req, res) {
-        
+        const produtos = await ProdutoModel.findAllWithTipoProdutoDescricao();
+        return res.render("produto/index", { produtos });
     }
 
     /**
@@ -16,6 +17,8 @@ class WebProdutoController {
     * @param {*} res Resposta da rota do express
     */
     async create(req, res) {
+        const tipoProdutos = await TipoProdutoModel.findAll();
+        return res.render("produto/create", { tipoProdutos });
     }
 
     /**
@@ -24,6 +27,14 @@ class WebProdutoController {
     * @param {*} res Resposta da rota do express
     */
     async store(req, res) {
+        const produto = new ProdutoModel();
+        produto.numero = req.body.numero;
+        produto.nome = req.body.nome;
+        produto.preco = req.body.preco;
+        produto.TipoProduto_id = req.body.TipoProduto_id;
+        produto.ingredientes = req.body.ingredientes;
+        const result = await produto.save();
+        return res.redirect("/produto");
     }
 
     /**
