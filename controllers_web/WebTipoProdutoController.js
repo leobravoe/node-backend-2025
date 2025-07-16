@@ -8,7 +8,7 @@ class WebTipoProdutoController {
      */
     async index(req, res) {
         const tipoProdutos = await TipoProdutoModel.findAll();
-        return res.render("tipoproduto/index", { tipoProdutos });
+        return res.render("tipoproduto/index", { layout: "layouts/main", title: "Index de TipoProduto", tipoProdutos });
     }
 
     /**
@@ -17,7 +17,7 @@ class WebTipoProdutoController {
      * @param {*} res Resposta da rota do express
      */
     async create(req, res) {
-        return res.render("tipoproduto/create");
+        return res.render("tipoproduto/create", { layout: "layouts/main", title: "Create de TipoProduto" });
     }
 
     /**
