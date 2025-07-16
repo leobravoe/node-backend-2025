@@ -22,7 +22,7 @@ class DataBase {
         connection.end();
         return rows;
     }
-    
+
     /**
     * Lê um arquivo SQL e executa seu conteúdo no Banco de Dados.
     * @param {String} filePath Caminho do arquivo SQL a ser executado.
