@@ -21,6 +21,11 @@ router.get("/produto/:produtoId/edit", webProdutoController.edit);
 router.put("/produto/:produtoId", webProdutoController.update);
 router.delete("/produto/:produtoId", webProdutoController.destroy);
 
+// Rotas de Mesa
+/* 
+   ...
+*/
+
 // Demais rotas ainda sem controlador (iremos criar um controlador para essas rotas no futuro)
 router.get("/recurso", async (request, response) => {
     response.render("Recurso/index");
