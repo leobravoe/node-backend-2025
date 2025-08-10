@@ -1,1 +1,26 @@
-{{!-- View create de Mesa --}}
+<div class="container">
+    <form method="post" action="/mesa">
+        {{!-- Grupo ID --}}
+        <div class="my-2">
+            <label for="id-input-id" class="form-label">ID</label>
+            <input id="id-input-id" type="text" class="form-control" value="#" disabled>
+        </div>
+        {{!-- Grupo Número --}}
+        <div class="my-2">
+            <label for="id-input-numero" class="form-label">Número</label>
+            <input name="numero" id="id-input-numero" type="number" class="form-control"
+                placeholder="Digite o número da mesa. Ex: 1">
+        </div>
+        {{!-- Grupo Estado --}}
+        <div class="my-2">
+            <label for="id-input-estado" class="form-label">Estado</label>
+            <input name="estado" id="id-input-estado" type="text" class="form-control"
+                placeholder="Digite o estado da mesa. Ex: A, O ou R">
+        </div>
+        {{!-- Grupo dos botões --}}
+        <div class="my-2">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <a href="/mesa" class="btn btn-primary">Voltar</a>
+        </div>
+    </form>
+</div>
