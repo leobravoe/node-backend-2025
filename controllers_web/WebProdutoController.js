@@ -45,7 +45,7 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async show(req, res) {
-        return res.send(`Parâmetro submetido: ${req.params.produtoId}`);
+        return res.send(`Show - Parâmetro submetido: ${req.params.produtoId}`);
     }
 
     /**
@@ -55,6 +55,7 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async edit(req, res) {
+        return res.send(`Edit - Parâmetro submetido: ${req.params.produtoId}`);
     }
 
     /**
