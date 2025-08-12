@@ -45,6 +45,7 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async show(req, res) {
+        return res.send(`Parâmetro submetido: ${req.params.produtoId}`);
     }
 
     /**
