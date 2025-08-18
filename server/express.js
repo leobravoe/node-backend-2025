@@ -1,5 +1,6 @@
 // O objetivo deste arquivo é configurar o servidor do express
 const express = require('express');
+const methodOverride = require("method-override");
 const dotenv = require('dotenv');
 const app = express();
 const webRoutes = require("../routes/web");
@@ -19,6 +20,9 @@ app.use(express.static("./public"));
 
 // Middleware do Express que é usado para fazer o parsing dos dados enviados pelo cliente através de formulários HTML
 app.use(express.urlencoded({ extended: false }));
+
+// Configura o method-override no express para poder usar put ou delete nos <form> do HTML
+app.use(methodOverride(req => (req.body?._method || req.query?._method)?.toUpperCase())); // lê _method do body ou query string
 
 // Define as rotas
 app.use(webRoutes);
