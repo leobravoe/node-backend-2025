@@ -41,8 +41,9 @@
                 Deseja realmente remover este recurso?
             </div>
             <div class="modal-footer">
-                <form method="post" action="/produto/1">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <form method="GET" action="/produto/1">
+                    <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Remover</button>
                 </form>
             </div>
