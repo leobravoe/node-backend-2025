@@ -74,6 +74,8 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async destroy(req, res) {
+        const produto = await ProdutoModel.findOne(req.params.produtoId);
+        return res.send(produto);
     }
 }
 module.exports = new WebProdutoController();
