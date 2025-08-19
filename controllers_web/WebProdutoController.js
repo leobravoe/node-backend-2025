@@ -19,7 +19,7 @@ class WebProdutoController {
     */
     async create(req, res) {
         const tipoProdutos = await TipoProdutoModel.findAll();
-        return res.render("produto/create", { layout:"layouts/main", title: "Create de Produto", tipoProdutos });
+        return res.render("produto/create", { layout: "layouts/main", title: "Create de Produto", tipoProdutos });
     }
 
     /**
@@ -75,7 +75,12 @@ class WebProdutoController {
     */
     async destroy(req, res) {
         const produto = await ProdutoModel.findOne(req.params.produtoId);
-        return res.send(produto);
+        // return res.send(produto);
+        // SE encontrou algo no findOne
+        if (produto) {
+            const result = await produto.delete();
+        }
+        return res.redirect("/produto");
     }
 }
 module.exports = new WebProdutoController();
