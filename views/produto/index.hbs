@@ -21,7 +21,7 @@
                 <td>
                     <a href="/produto/{{this.id}}" class="btn btn-primary">Mostrar</a>
                     <a href="/produto/{{this.id}}/edit" class="btn btn-secondary">Editar</a>
-                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeModal">Remover</a>
+                    <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeModal" onclick="setModalAction('/produto/{{this.id}}')">Remover</a>
                 </td>
             </tr>
             {{/each}}
