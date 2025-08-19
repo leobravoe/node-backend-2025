@@ -42,7 +42,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <form method="POST" action="/produto/1">
+                <form id="form-modal-remover" method="POST" action="/produto/1">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit" class="btn btn-danger">Remover</button>
                 </form>
@@ -50,3 +50,11 @@
         </div>
     </div>
 </div>
+
+<script>
+    setModalAction(action){
+        // Encontrar o form de dentro do Modal
+        const formModalRemover = document.querySelector("#form-modal-remover");
+        console.log(formModalRemover);
+    }
+</script>
