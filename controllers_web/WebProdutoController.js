@@ -47,6 +47,7 @@ class WebProdutoController {
     async show(req, res) {
         // return res.send(`Show - Parâmetro submetido: ${req.params.produtoId}`);
         const produto = await ProdutoModel.findOneWithTipoProdutoDescricao(req.params.produtoId);
+        console.log(produto);
         return res.render("produto/show", {layout: "layouts/main", title: "Show de Produto", produto});
     }
 
