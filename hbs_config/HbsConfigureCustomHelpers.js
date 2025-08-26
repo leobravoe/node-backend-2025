@@ -1,4 +1,5 @@
 const hbs = require("hbs");
+
 class HbsConfigureCustomHelpers {
     /**
      * Define o custom helper do hbs, para realizar comparações de igualdade dentro de um view .hbs
@@ -11,4 +12,5 @@ class HbsConfigureCustomHelpers {
         });
     }
 };
+
 module.exports = HbsConfigureCustomHelpers;
