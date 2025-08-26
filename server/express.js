@@ -1,6 +1,7 @@
 // O objetivo deste arquivo é configurar o servidor do express
 const express = require('express');
 const methodOverride = require("method-override");
+const HbsConfigureCustomHelpers = require("../hbs_config/HbsConfigureCustomHelpers");
 const dotenv = require('dotenv');
 const app = express();
 const webRoutes = require("../routes/web");
@@ -14,6 +15,9 @@ app.set("port", process.env.PORT || 5000);
 
 // Seto a propriedade "view engine" do express com "hbs"
 app.set("view engine", "hbs");
+
+// Configura os CustomHelpers do pacote hbs
+HbsConfigureCustomHelpers.run();
 
 // Define as rotas estáticas para os arquivos da pasta /public
 app.use(express.static("./public"));
