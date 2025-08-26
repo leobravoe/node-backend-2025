@@ -48,7 +48,7 @@ class WebProdutoController {
         // return res.send(`Show - Parâmetro submetido: ${req.params.produtoId}`);
         const produto = await ProdutoModel.findOneWithTipoProdutoDescricao(req.params.produtoId);
         // console.log(produto);
-        return res.render("produto/show", {layout: "layouts/main", title: "Show de Produto", produto});
+        return res.render("produto/show", { layout: "layouts/main", title: "Show de Produto", produto });
     }
 
     /**
@@ -60,7 +60,7 @@ class WebProdutoController {
     async edit(req, res) {
         const tipoProdutos = await TipoProdutoModel.findAll();
         const produto = await ProdutoModel.findOne(req.params.produtoId);
-        return res.render("produto/edit", {layout: "layouts/main", title: "Edit de Produto", produto, tipoProdutos});
+        return res.render("produto/edit", { layout: "layouts/main", title: "Edit de Produto", produto, tipoProdutos });
     }
 
     /**
@@ -70,6 +70,16 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async update(req, res) {
+        const produto = await ProdutoModel.findOne(req.params.produtoId);
+        if (produto) {
+            produto.numero = req.body.numero;
+            produto.nome = req.body.nome;
+            produto.preco = req.body.preco;
+            produto.TipoProduto_id = req.body.TipoProduto_id;
+            produto.ingredientes = req.body.ingredientes;
+            const result = await produto.update();
+        }
+        res.redirect("/produto");
     }
 
     /**
