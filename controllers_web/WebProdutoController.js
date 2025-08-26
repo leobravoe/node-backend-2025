@@ -47,7 +47,7 @@ class WebProdutoController {
     async show(req, res) {
         // return res.send(`Show - Parâmetro submetido: ${req.params.produtoId}`);
         const produto = await ProdutoModel.findOneWithTipoProdutoDescricao(req.params.produtoId);
-        console.log(produto);
+        // console.log(produto);
         return res.render("produto/show", {layout: "layouts/main", title: "Show de Produto", produto});
     }
 
@@ -58,7 +58,9 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async edit(req, res) {
-        return res.send(`Edit - Parâmetro submetido: ${req.params.produtoId}`);
+        const tipoProdutos = await TipoProdutoModel.findAll();
+        const produto = await ProdutoModel.findOne(req.params.produtoId);
+        return res.render("produto/edit", {layout: "layouts/main", title: "Edit de Produto", produto, tipoProdutos});
     }
 
     /**
