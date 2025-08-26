@@ -26,7 +26,7 @@ app.use(express.static("./public"));
 app.use(express.urlencoded({ extended: false }));
 
 // Configura o method-override no express para poder usar put ou delete nos <form> do HTML
-app.use(methodOverride(req => req.body?._method?.toUpperCase())); // lê _method do body ou query string
+app.use(methodOverride(req => req.body?._method?.toUpperCase())); // lê _method do body
 
 // Define as rotas
 app.use(webRoutes);
