@@ -8,8 +8,13 @@ class WebProdutoController {
      * @param {*} res Resposta da rota do express
      */
     async index(req, res) {
-        const produtos = await ProdutoModel.findAllWithTipoProdutoDescricao();
-        return res.render("produto/index", { layout: "layouts/main", title: "Index de Produto", produtos });
+        try {
+            const produtos = await ProdutoModel.findAllWithTipoProdutoDescricao();
+            const mensagem = ['success', 'O produto foi salvo'];
+            return res.render("produto/index", { layout: "layouts/main", title: "Index de Produto", produtos, mensagem });
+        } catch (error) {
+            return res.send(error);
+        }
     }
 
     /**
