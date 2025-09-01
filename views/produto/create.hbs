@@ -1,5 +1,5 @@
 <div class="container">
-    <form method="post" action="/produto">
+    <form method="post" action="/produto" enctype="multipart/form-data">
         {{!-- Grupo ID --}}
         <div class="my-2">
             <label for="id-input-id" class="form-label">ID</label>
@@ -37,6 +37,11 @@
             <label for="id-input-ingredientes" class="form-label">Ingredientes</label>
             <input name="ingredientes" id="id-input-ingredientes" type="text" class="form-control"
                 placeholder="Digite os ingredientes para o produto. Ex: Massa de pizza...">
+        </div>
+        {{!-- Grupo Imagem --}}
+        <div class="my-2">
+            <label for="id-input-imagem" class="form-label">Imagem</label>
+            <input name="imagem" id="id-input-imagem" type="file" class="form-control" accept="image/*">
         </div>
         {{!-- Grupo dos botões --}}
         <div class="my-2">

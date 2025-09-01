@@ -29,6 +29,8 @@ class WebProdutoController {
     */
     async store(req, res) {
         const produto = new ProdutoModel();
+        console.log(req.body);
+        console.log(req.file);
         produto.numero = req.body.numero;
         produto.nome = req.body.nome;
         produto.preco = req.body.preco;
