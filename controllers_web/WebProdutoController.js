@@ -13,7 +13,11 @@ class WebProdutoController {
             const mensagem = ['success', 'O produto foi salvo'];
             return res.render("produto/index", { layout: "layouts/main", title: "Index de Produto", produtos, mensagem });
         } catch (error) {
-            return res.send(error);
+            // O error é um objeto que contem o erro de tempo de execução provocado
+            console.log( JSON.stringify(error) );
+            const mensagem = ['danger', error];
+            const produtos = [];
+            return res.render("produto/index", { layout: "layouts/main", title: "Index de Produto", produtos, mensagem });
         }
     }
 
