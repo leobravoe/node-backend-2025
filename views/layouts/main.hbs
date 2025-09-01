@@ -40,6 +40,12 @@
                 <a class="nav-link" href="#">Relatórios</a>
             </li>
         </ul>
+        {{#if mensagem}}
+        <div class="alert alert-{{mensagem.[0]}} alert-dismissible fade show my-3" role="alert">
+            <strong>{{mensagem.[1]}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{/if}}
     </div>
     {{{body}}}
 </body>
