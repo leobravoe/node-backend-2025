@@ -27,14 +27,14 @@
 
 Com o projeto configurado, para atualizar:
 
-1. Limpa para o commit mais atual
-    ```bash
-    git clean -fd
-    ```
-
-2. Reseta para o commit mais atual
+1. Reseta para o commit mais atual
     ```bash
     git reset --hard
+    ```
+
+2. Limpa para o commit mais atual
+    ```bash
+    git clean -fd
     ```
 
 2. Baixe a atualização
