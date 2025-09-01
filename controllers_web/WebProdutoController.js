@@ -45,9 +45,7 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async show(req, res) {
-        // return res.send(`Show - Parâmetro submetido: ${req.params.produtoId}`);
         const produto = await ProdutoModel.findOneWithTipoProdutoDescricao(req.params.produtoId);
-        // console.log(produto);
         return res.render("produto/show", { layout: "layouts/main", title: "Show de Produto", produto });
     }
 
@@ -90,8 +88,6 @@ class WebProdutoController {
     */
     async destroy(req, res) {
         const produto = await ProdutoModel.findOne(req.params.produtoId);
-        // return res.send(produto);
-        // SE encontrou algo no findOne
         if (produto) {
             const result = await produto.delete();
         }
