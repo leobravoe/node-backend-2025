@@ -19,9 +19,14 @@
     copy .env.example .env
     ```
 
-5. Rode o script SQL para criar o banco
+5. Ligue o banco de dados MySQL e rode o comando para criar o banco
     ```bash
     npm run reset-database
+    ```
+
+6. Rode o projeto em modo de desenvolvimento
+    ```bash
+    npm run dev
     ```
 
 
@@ -37,7 +42,7 @@ Com o projeto configurado, para atualizar:
     git clean -fd
     ```
 
-2. Baixe a atualização
+3. Baixe a atualização
     ```bash
     git pull
     ```
