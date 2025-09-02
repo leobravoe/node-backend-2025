@@ -53,6 +53,7 @@ class WebProdutoController {
             const mensagem = JSON.stringify(["success", `O produto ${produto.nome} foi cadastrado com sucesso`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         } catch (error) {
+            console.log(error);
             const mensagem = JSON.stringify(["danger", JSON.stringify(error)]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         }
