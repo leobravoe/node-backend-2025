@@ -51,7 +51,7 @@ class WebProdutoController {
             produto.ingredientes = req.body.ingredientes;
             const result = await produto.save();
             const mensagem = JSON.stringify(["success", `O produto ${produto.nome} foi cadastrado com sucesso`]);
-            return res.redirect("/produto");
+            return res.redirect(`/produto?mensagem=${mensagem}`);
         } catch (error) {
             const mensagem = JSON.stringify(["danger", JSON.stringify(error)]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
