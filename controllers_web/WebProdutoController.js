@@ -10,7 +10,7 @@ class WebProdutoController {
     async index(req, res) {
         try {
             const produtos = await ProdutoModel.findAllWithTipoProdutoDescricao();
-            const mensagem = ['success', 'O produto foi salvo'];
+            const mensagem = req.query.mensagem ? JSON.parse(req.query.mensagem) : null;
             return res.render("produto/index", { layout: "layouts/main", title: "Index de Produto", produtos, mensagem });
         } catch (error) {
             const mensagem = ['danger', JSON.stringify(error)];
@@ -40,16 +40,22 @@ class WebProdutoController {
     * @param {*} res Resposta da rota do express
     */
     async store(req, res) {
-        const produto = new ProdutoModel();
-        console.log(req.body);
-        console.log(req.file);
-        produto.numero = req.body.numero;
-        produto.nome = req.body.nome;
-        produto.preco = req.body.preco;
-        produto.TipoProduto_id = req.body.TipoProduto_id;
-        produto.ingredientes = req.body.ingredientes;
-        const result = await produto.save();
-        return res.redirect("/produto");
+        try {
+            const produto = new ProdutoModel();
+            console.log(req.body);
+            console.log(req.file);
+            produto.numero = req.body.numero;
+            produto.nome = req.body.nome;
+            produto.preco = req.body.preco;
+            produto.TipoProduto_id = req.body.TipoProduto_id;
+            produto.ingredientes = req.body.ingredientes;
+            const result = await produto.save();
+            const mensagem = JSON.stringify(["success", `O produto ${produto.nome} foi cadastrado com sucesso`]);
+            return res.redirect("/produto");
+        } catch (error) {
+            const mensagem = JSON.stringify(["danger", JSON.stringify(error)]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
+        }
     }
 
     /**
