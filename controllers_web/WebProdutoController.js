@@ -42,18 +42,15 @@ class WebProdutoController {
     async store(req, res) {
         try {
             const produto = new ProdutoModel();
-            console.log(req.body);
-            console.log(req.file);
             produto.numero = req.body.numero;
             produto.nome = req.body.nome;
             produto.preco = req.body.preco;
             produto.TipoProduto_id = req.body.TipoProduto_id;
             produto.ingredientes = req.body.ingredientes;
             const result = await produto.save();
-            const mensagem = JSON.stringify(["success", `O produto ${produto.nome} foi cadastrado com sucesso`]);
+            const mensagem = JSON.stringify(["success", `O produto (${result.id}-${result.nome}) foi cadastrado com sucesso`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         } catch (error) {
-            console.log(error);
             const mensagem = JSON.stringify(["danger", JSON.stringify(error)]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         }
@@ -66,8 +63,13 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async show(req, res) {
-        const produto = await ProdutoModel.findOneWithTipoProdutoDescricao(req.params.produtoId);
-        return res.render("produto/show", { layout: "layouts/main", title: "Show de Produto", produto });
+        try {
+            const produto = await ProdutoModel.findOneWithTipoProdutoDescricao(req.params.produtoId);
+            return res.render("produto/show", { layout: "layouts/main", title: "Show de Produto", produto });
+        } catch (error) {
+            const mensagem = JSON.stringify(["danger", JSON.stringify(error)]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
+        }
     }
 
     /**
@@ -77,9 +79,18 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async edit(req, res) {
-        const tipoProdutos = await TipoProdutoModel.findAll();
-        const produto = await ProdutoModel.findOne(req.params.produtoId);
-        return res.render("produto/edit", { layout: "layouts/main", title: "Edit de Produto", produto, tipoProdutos });
+        try {
+            const tipoProdutos = await TipoProdutoModel.findAll();
+            const produto = await ProdutoModel.findOne(req.params.produtoId);
+            if (!produto) {
+                const mensagem = JSON.stringify(['warning', `Produto não encontrado`]);
+                return res.redirect(`/produto?mensagem=${mensagem}`);
+            }
+            return res.render("produto/edit", { layout: "layouts/main", title: "Edit de Produto", produto, tipoProdutos });
+        } catch (error) {
+            const mensagem = JSON.stringify(["danger", `Erro: ${JSON.stringify(error)}`]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
+        }
     }
 
     /**
