@@ -13,10 +13,7 @@ class WebProdutoController {
             const mensagem = ['success', 'O produto foi salvo'];
             return res.render("produto/index", { layout: "layouts/main", title: "Index de Produto", produtos, mensagem });
         } catch (error) {
-            // O error é um objeto que contem o erro de tempo de execução provocado
-            console.log( error );
-            console.log( JSON.stringify(error) );
-            const mensagem = ['danger', error];
+            const mensagem = ['danger', JSON.stringify(error)];
             const produtos = [];
             return res.render("produto/index", { layout: "layouts/main", title: "Index de Produto", produtos, mensagem });
         }
@@ -28,8 +25,13 @@ class WebProdutoController {
     * @param {*} res Resposta da rota do express
     */
     async create(req, res) {
-        const tipoProdutos = await TipoProdutoModel.findAll();
-        return res.render("produto/create", { layout: "layouts/main", title: "Create de Produto", tipoProdutos });
+        try {
+            const tipoProdutos = await TipoProdutoModel.findAll();
+            return res.render("produto/create", { layout: "layouts/main", title: "Create de Produto", tipoProdutos });
+        } catch (error) {
+            const mensagem = JSON.stringify(["danger", JSON.stringify(error)]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
+        }
     }
 
     /**
