@@ -100,17 +100,26 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async update(req, res) {
-        const produto = await ProdutoModel.findOne(req.params.produtoId);
-        if (produto) {
+        try {
+            const produto = await ProdutoModel.findOne(req.params.produtoId);
+            if (!produto) {
+                const mensagem = JSON.stringify(['warning', `Produto não encontrado`]);
+                return res.redirect(`/produto?mensagem=${mensagem}`);
+            }
             produto.numero = req.body.numero;
             produto.nome = req.body.nome;
             produto.preco = req.body.preco;
             produto.TipoProduto_id = req.body.TipoProduto_id;
             produto.ingredientes = req.body.ingredientes;
             const result = await produto.update();
+            const mensagem = JSON.stringify(['success', `Produto ${result.nome} atualizado com sucesso`]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
+        } catch (error) {
+            const mensagem = JSON.stringify(["danger", `Erro: ${JSON.stringify(error)}`]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
         }
-        res.redirect("/produto");
     }
+
 
     /**
     * Remove um recurso existente do banco de dados
@@ -119,11 +128,20 @@ class WebProdutoController {
     * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
     */
     async destroy(req, res) {
-        const produto = await ProdutoModel.findOne(req.params.produtoId);
-        if (produto) {
+        try {
+            const produto = await ProdutoModel.findOne(req.params.produtoId);
+            if (!produto) {
+                const mensagem = JSON.stringify(['warning', `Produto não encontrado`]);
+                return res.redirect(`/produto?mensagem=${mensagem}`);
+            }
             const result = await produto.delete();
+            const mensagem = JSON.stringify(['success', `Produto ${result.nome} removido com sucesso`]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
+        } catch (error) {
+            const mensagem = JSON.stringify(["danger", `Erro: ${JSON.stringify(error)}`]);
+            return res.redirect(`/produto?mensagem=${mensagem}`);
         }
-        return res.redirect("/produto");
     }
+
 }
 module.exports = new WebProdutoController();
