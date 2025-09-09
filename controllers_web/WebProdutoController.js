@@ -1,5 +1,7 @@
 const ProdutoModel = require("../models/ProdutoModel");
 const TipoProdutoModel = require("../models/TipoProdutoModel");
+const fs = require("fs").promises;
+const path = require("path");
 
 class WebProdutoController {
     /**
@@ -47,6 +49,7 @@ class WebProdutoController {
             produto.preco = req.body.preco;
             produto.TipoProduto_id = req.body.TipoProduto_id;
             produto.ingredientes = req.body.ingredientes;
+            if (req.file) produto.urlImagem = `/uploads/produtos/${req.file.filename}`;
             const result = await produto.save();
             const mensagem = JSON.stringify(["success", `O produto (${result.id}-${result.nome}) foi cadastrado com sucesso`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
@@ -94,11 +97,11 @@ class WebProdutoController {
     }
 
     /**
-    * Atualiza um recurso existente no banco de dados
-    * @param {*} req Requisição da rota do express
-    * @param {*} res Resposta da rota do express
-    * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
-    */
+* Atualiza um recurso existente no banco de dados
+* @param {*} req Requisição da rota do express
+* @param {*} res Resposta da rota do express
+* @param {Number} req.params.produtoId Parâmetro passado pela rota do express
+*/
     async update(req, res) {
         try {
             const produto = await ProdutoModel.findOne(req.params.produtoId);
@@ -111,6 +114,14 @@ class WebProdutoController {
             produto.preco = req.body.preco;
             produto.TipoProduto_id = req.body.TipoProduto_id;
             produto.ingredientes = req.body.ingredientes;
+            // Se veio nova imagem: remove a antiga (se local) e atualiza urlImage
+            if (req.file) {
+                if (produto.urlImagem) {
+                    const oldAbsPath = path.resolve(`.${produto.urlImagem}`); // ex.: ./uploads/produtos/arquivo.jpg
+                    await fs.unlink(oldAbsPath).catch(() => { }); // ignora erro se arquivo não existir
+                }
+                produto.urlImagem = `/uploads/produtos/${req.file.filename}`;
+            }
             const result = await produto.update();
             const mensagem = JSON.stringify(['success', `Produto ${result.nome} atualizado com sucesso`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
@@ -122,11 +133,11 @@ class WebProdutoController {
 
 
     /**
-    * Remove um recurso existente do banco de dados
-    * @param {*} req Requisição da rota do express
-    * @param {*} res Resposta da rota do express
-    * @param {Number} req.params.produtoId Parâmetro passado pela rota do express
-    */
+* Remove um recurso existente do banco de dados
+* @param {*} req Requisição da rota do express
+* @param {*} res Resposta da rota do express
+* @param {Number} req.params.produtoId Parâmetro passado pela rota do express
+*/
     async destroy(req, res) {
         try {
             const produto = await ProdutoModel.findOne(req.params.produtoId);
@@ -135,6 +146,11 @@ class WebProdutoController {
                 return res.redirect(`/produto?mensagem=${mensagem}`);
             }
             const result = await produto.delete();
+            // Remove a imagem local se houver
+            if (produto.urlImagem) {
+                const absPath = path.resolve(`.${produto.urlImagem}`); // ex.: ./uploads/produtos/arquivo.jpg
+                await fs.unlink(absPath).catch(() => { }); // ignora erro se o arquivo já não existir
+            }
             const mensagem = JSON.stringify(['success', `Produto ${result.nome} removido com sucesso`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         } catch (error) {

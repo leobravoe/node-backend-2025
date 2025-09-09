@@ -10,6 +10,7 @@ class ProdutoModel {
     preco = null;
     TipoProduto_id = null;
     ingredientes = null;
+    urlImagem = null;
     dataAtualizacao = null;
     dataCriacao = null;
 
@@ -25,9 +26,7 @@ class ProdutoModel {
             "nome" in produto &&
             "preco" in produto &&
             "TipoProduto_id" in produto &&
-            "ingredientes" in produto &&
-            "dataAtualizacao" in produto &&
-            "dataCriacao" in produto
+            "ingredientes" in produto
         ) {
             this.id = produto.id;
             this.numero = produto.numero;
@@ -35,8 +34,9 @@ class ProdutoModel {
             this.preco = produto.preco;
             this.TipoProduto_id = produto.TipoProduto_id;
             this.ingredientes = produto.ingredientes;
-            this.dataAtualizacao = produto.dataAtualizacao;
-            this.dataCriacao = produto.dataCriacao;
+            this.urlImagem = produto.urlImagem ? produto.urlImagem : null;
+            this.dataAtualizacao = produto.dataAtualizacao ? produto.dataAtualizacao : null;
+            this.dataCriacao = produto.dataCriacao ? produto.dataCriacao : null;
         }
     }
 
@@ -108,13 +108,14 @@ class ProdutoModel {
     async save() {
         // Gera um timestamp no formato "YYYY-MM-DD HH:MM:SS" com a data e horário atual
         const timestamp = (new Date()).toISOString().slice(0, 19).replace('T', ' ');
-        const result = await DataBase.executeSQLQuery(`INSERT INTO Produto VALUES (null, ?, ?, ?, ?, ?, ?, ?);`,
+        const result = await DataBase.executeSQLQuery(`INSERT INTO Produto VALUES (null, ?, ?, ?, ?, ?, ?, ?, ?);`,
             [
                 this.numero,
                 this.nome,
                 this.preco,
                 this.TipoProduto_id,
                 this.ingredientes,
+                this.urlImagem,
                 timestamp,
                 timestamp
             ]
@@ -136,6 +137,7 @@ class ProdutoModel {
                                                            preco = ?,
                                                            TipoProduto_id = ?,
                                                            ingredientes = ?,
+                                                           urlImagem = ?,
                                                            dataAtualizacao = ?
                                                        WHERE Produto.id = ?`,
             [
@@ -144,6 +146,7 @@ class ProdutoModel {
                 this.preco,
                 this.TipoProduto_id,
                 this.ingredientes,
+                this.urlImagem,
                 timestamp,
                 this.id,
             ]

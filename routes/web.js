@@ -2,6 +2,7 @@ const express = require("express");
 const webProdutoController = require("../controllers_web/WebProdutoController");
 const webTipoProdutoController = require("../controllers_web/WebTipoProdutoController");
 const webMesaController = require("../controllers_web/WebMesaController");
+const uploadImagem = require("../multer_config/multerConfig");
 const router = express.Router();
 
 // Rotas de TipoProduto
@@ -16,10 +17,10 @@ router.delete("/tipoproduto/:tipoProdutoId", webTipoProdutoController.destroy);
 // Rotas de Produto
 router.get("/produto", webProdutoController.index);
 router.get("/produto/create", webProdutoController.create);
-router.post("/produto", webProdutoController.store);
+router.post("/produto", uploadImagem.single("imagem"), webProdutoController.store);
 router.get("/produto/:produtoId", webProdutoController.show);
 router.get("/produto/:produtoId/edit", webProdutoController.edit);
-router.put("/produto/:produtoId", webProdutoController.update);
+router.put("/produto/:produtoId", uploadImagem.single("imagem"), webProdutoController.update);
 router.delete("/produto/:produtoId", webProdutoController.destroy);
 
 // Rotas de Mesa
