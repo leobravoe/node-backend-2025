@@ -54,6 +54,10 @@ class WebProdutoController {
             const mensagem = JSON.stringify(["success", `O produto (${result.id}-${result.nome}) foi cadastrado com sucesso`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         } catch (error) {
+            if (req.file) {
+                const oldAbsPath = path.resolve(`./uploads/produtos/${req.file.filename}`); // ex.: ./uploads/produtos/arquivo.jpg
+                await fs.unlink(oldAbsPath).catch(() => { }); // ignora erro se arquivo não existir
+            }
             const mensagem = JSON.stringify(["danger", JSON.stringify(error)]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         }
@@ -126,6 +130,10 @@ class WebProdutoController {
             const mensagem = JSON.stringify(['success', `Produto ${result.nome} atualizado com sucesso`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         } catch (error) {
+            if (req.file) {
+                const oldAbsPath = path.resolve(`./uploads/produtos/${req.file.filename}`); // ex.: ./uploads/produtos/arquivo.jpg
+                await fs.unlink(oldAbsPath).catch(() => { }); // ignora erro se arquivo não existir
+            }
             const mensagem = JSON.stringify(["danger", `Erro: ${JSON.stringify(error)}`]);
             return res.redirect(`/produto?mensagem=${mensagem}`);
         }
